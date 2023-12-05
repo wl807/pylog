@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+  </head>
+
+  <body>
+    <div id="navbar">
+      <span>pylog</span>
+      <a href="{% url "post_add" %}" class="btn btn-primary">글 작성</a>
+    </div>
+
+    <div id="post-list">
+
+      <ul class="posts">
+        {% for post in posts %}
+          <li class="post">
+            <!-- url 태그는 urls.py 에서 정한 name을 써야 한다!!! -->
+            <!-- 이름을 사용하여 템플릿에서 URL을 동적으로 생성하기 때문. -->
+            <!-- urls.py 의 urlpatters 앞에 앱 이름을 지어놨다면? blog:post_detail -->
+            <a href="{% url "post_detail" post.id %}">{{post.title}}</a>
+
+            <p>{{post.content}}</p>
+            <!-- 역방향 접근의 경우 함수의 ()을 빼야 한다 -->
+            <ul class="comments">
+              {% for comment in post.comment_set.all %}
+                <li class="comment">{{comment.content}}</li>
+                {% empty %}
+                <li class="comment-empty">아직 댓글이 없습니다</li>
+              {% endfor %}
+            </ul>
+            {% if post.thumbnail %}
+              <img src="{{post.thumbnail.url}}" alt="">
+            {% else %}
+              <img src="" alt="">
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </body>
+
+</html>

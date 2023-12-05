@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+  </head>
+
+  <body>
+    <div id="navbar">
+      <span>글 작성</span>
+    </div>
+    <div id="post-add">
+      <!-- get 은 url로 데이터를 전송하는 방식. 하지만 여러 제약, 보안상 문제 많다 // 읽기, 조회용-->
+      <!-- <form action="" method="get"> -->
+
+      <!-- post 는 작성, 변경용 -->
+      <!-- 이미지를 form으로 전달받으려면 enctype="multipart/form-data" -->
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+          <!-- label 과 input 은 for 과 id 로 연결 -->
+          <!-- input 의 name과 textarea의 name으로 View 에 전달됨-->
+          <label for="title">제목</label>
+          <input type="text" name="title" id="title">
+        </div>
+        <div>
+          <label for="content">내용</label>
+          <textarea name="content"></textarea>
+        </div>
+        <div>
+          <label for="">썸네일</label>
+          <input type="file" name="thumbnail" id="">
+        </div>
+        <button type="submit" class="btn btn-primary">작성</button>
+      </form>
+    </div>
+  </body>
+
+</html>
