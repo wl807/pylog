@@ -15,6 +15,7 @@
         <img src="{{post.thumbnail.url}}" alt="">
       {% endif %}
       <span>{{post.title}}</span>
+      <a href="{% url "post_list" %}" class="btn btn-primary">목록으로</a>
     </div>
     <div id="post-detail">
       <!-- |linebreaksbr filter 로 줄바꿈 적용 -->
